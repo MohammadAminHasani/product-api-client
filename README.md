@@ -31,7 +31,7 @@ product-api-client/
 ## Setup
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/MohammadAminHasani/product-api-client>
 cd product-api-client
 pip install -r requirements.txt
 ```
