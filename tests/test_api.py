@@ -1,7 +1,12 @@
 from unittest.mock import patch, Mock
 import requests
-from src.api import get_products, add_product, update_product, delete_product
-
+from src.api import (
+    get_products,
+    get_product,
+    add_product,
+    update_product,
+    delete_product
+)
 
 @patch("src.api.requests.get")
 def test_get_products_success(mock_get):
@@ -12,6 +17,20 @@ def test_get_products_success(mock_get):
 
     result = get_products()
     assert result["products"][0]["title"] == "Phone"
+
+@patch("src.api.requests.get")
+def test_get_product_success(mock_get):
+    mock_response = Mock()
+    mock_response.json.return_value = {
+        "id": 1,
+        "title": "Phone"
+    }
+    mock_response.raise_for_status.return_value = None
+    mock_get.return_value = mock_response
+
+    result = get_product(1)
+
+    assert result["title"] == "Phone"
 
 
 @patch("src.api.requests.get")

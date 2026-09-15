@@ -5,6 +5,8 @@ from src.api import (
     delete_product
 )
 
+from src.cli import run_cli
+
 def main():
     products = get_products()
     
@@ -25,8 +27,8 @@ def main():
     
     
     new_product = {
-        'title':'Gaming Controller',
-        'price':80,
+        'title':'Gaming controller',
+        'price':100,
         'stock': 50
     }
     
@@ -79,4 +81,4 @@ def main():
         print('Failed To Delete Product')
 
 if __name__ == '__main__':
-    main()
+    run_cli()

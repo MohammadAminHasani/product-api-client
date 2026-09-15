@@ -22,6 +22,22 @@ def get_products() -> dict | None:
         logger.error('GET Error: %s' , error)
 
         return None
+
+def get_product(product_id : int) -> dict | None:
+    try:
+        url = f"{BASE_URL}/products/{product_id}"
+
+        response = requests.get(url , timeout=TIMEOUT)
+
+        response.raise_for_status()
+
+        return response.json()
+    
+    except requests.exceptions.RequestException as error:
+
+        logger.error("GET PRODUCT Error : %s", error)
+
+        return None 
     
 def add_product(product: dict)-> dict | None:
     try:
