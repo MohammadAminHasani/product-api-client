@@ -23,6 +23,25 @@ def get_products() -> dict | None:
 
         return None
 
+def search_products(query: str) -> dict | None:
+    try:
+        url = f"{BASE_URL}/products/search"
+
+        response = requests.get(
+            url,
+            params={"q": query},
+            timeout=TIMEOUT
+        )
+
+        response.raise_for_status()
+
+        return response.json()
+
+    except requests.exceptions.RequestException as error:
+        logger.error("SEARCH Error: %s", error)
+
+        return None
+
 def get_product(product_id : int) -> dict | None:
     try:
         url = f"{BASE_URL}/products/{product_id}"

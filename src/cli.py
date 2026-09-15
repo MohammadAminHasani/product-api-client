@@ -3,7 +3,8 @@ from src.api import (
     get_product,
     add_product,
     update_product,
-    delete_product
+    delete_product,
+    search_products
 )
 
 from colorama import Fore, Style, init
@@ -18,11 +19,12 @@ def show_menu():
 ========== PRODUCT API CLIENT ==========
 
 1. List products
-2. View product
-3. Add product
-4. Update product
-5. Delete product
-6. Exit
+2. Search products
+3. View product
+4. Add product
+5. Update product
+6. Delete product
+7. Exit
 
 """ +
         Style.RESET_ALL
@@ -44,6 +46,23 @@ def list_products():
 
     else:
         print(Fore.RED + "No Products Found" + Style.RESET_ALL)
+
+def search_product():
+    query = input("Search product: ")
+
+    result = search_products(query)
+
+    print(Fore.CYAN + "\n========= SEARCH RESULTS =========" + Style.RESET_ALL)
+
+    if result and result["products"]:
+        for product in result["products"]:
+            print(Fore.YELLOW + "-------------------" + Style.RESET_ALL)
+            print("ID:", product["id"])
+            print("NAME:", product["title"])
+            print("PRICE:", product["price"])
+
+    else:
+        print(Fore.RED + "No products found" + Style.RESET_ALL)
 
 
 def view_product():
@@ -155,18 +174,21 @@ def run_cli():
             list_products()
 
         elif choice == '2':
+            search_product()
+
+        elif choice == '3':
             view_product()
 
-        elif choice == "3":
+        elif choice == '4':
             create_product()
 
-        elif choice == '4':
+        elif choice == '5':
             edit_product()
 
-        elif choice == '5':
+        elif choice == '6':
             remove_product()
 
-        elif choice == "6":
+        elif choice == '7':
             print(Fore.GREEN + "Goodbye!" + Style.RESET_ALL)
             break
 

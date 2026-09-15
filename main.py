@@ -16,7 +16,6 @@ def main():
     if products:
     
         for product in products['products']:
-            print("----------------")
             print("ID: ",product['id'])
             print("NAME: ",product['title'])
             print("PRICE: ",product['price'])
